@@ -1,9 +1,12 @@
 # Import the MySQL client library
+from middleware import *
 import mysql.connector
 
 # Import the credentials file
 import credentials
 pwd = credentials.login['password']
+
+# Import middleware functions
 
 # Create a connection to the database
 cnx = mysql.connector.connect(
@@ -12,14 +15,60 @@ cnx = mysql.connector.connect(
 # Create a cursor object
 cursor = cnx.cursor()
 
-# Execute a SQL query
-query = 'SELECT * FROM PUBLISHER'
-cursor.execute(query)
+quit = False
 
-# Iterate over the results
-for result in cursor:
-    print(result)
+# Prompt the user with menu until quit
+while not quit:
+    # Print the menu of options for the user
+    print()
+    print()
+    # print(colored("*********************************", "magenta"))
+    print(colored("Bookstore Manager", "white", "on_magenta"))
+    print()
+    print("1. Track a new visit")
+    print("2. Retrieve user's reward points")
+    print("3. Create a new member")
+    print("4. Add a phone number to a member's account")
+    print("5. Add a new book from a publisher")
+    print("6. Check if a book is in stock")
+    print("7. Sell a book")
+    print("8. Create a new employee")
+    print("9. Add a dependent to an employee")
+    print("10. Check the total number of store visits")
+    print("11. Quit")
+    print()
+
+    # Prompt the user to select an option
+    option = input("Enter your choice: ")
+    print()
+
+    # Execute the selected option
+    if option == "1":
+        track_visit(cursor)
+    elif option == "2":
+        get_points()
+    elif option == "3":
+        create_member()
+    elif option == "4":
+        add_member_phone()
+    elif option == "5":
+        acquire_book()
+    elif option == "6":
+        check_book(cursor)
+    elif option == "7":
+        sell_book()
+    elif option == "8":
+        create_employee()
+    elif option == "9":
+        create_dependent()
+    elif option == "10":
+        check_visits(cursor, 101)
+    elif option == "11":
+        # Set the quit flag to True
+        quit = True
 
 # Close the cursor and connection
+print("Thank you for using the bookstore manager!")
+print()
 cursor.close()
 cnx.close()
