@@ -2,7 +2,9 @@
 CS 3380 (Databases) Final Project
 
 ## Prerequisites
-1. After cloning, you will need to create a file called `credentials.py` and add your mySQL password to it. For example:
+1. Install termcolor with `python3 -m pip install --upgrade termcolor`
+2. Install mysql.connector with `pip install mysql-connector-python`
+1. After cloning this repo, you will need to create a file called `credentials.py` and add your mySQL password to it. For example:
 ```
 # credentials.py
 
