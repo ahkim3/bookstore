@@ -15,25 +15,100 @@ def execute_and_print(query, cursor):
     input("Press Enter to continue...")
 
 
-def track_visit(cursor):
-    query = 'SELECT * FROM PUBLISHER'
-    execute_and_print(query, cursor)
+# This function adds a visit to the bookstore and adds a point to the member’s rewards (e.g., after a
+# user checks in at the entrance by scanning a key tag with their Member_ID as a barcode). It accesses
+# the “MEMBER” table and “BOOKSTORE” table.
+def track_visit(cursor, Store_ID):
+    Member_ID = input("Please enter the Member ID: ")
+
+    query = "UPDATE MEMBER SET Reward_points = Reward_points + 1 WHERE Member_ID = " + \
+        str(Member_ID)
+    cursor.execute(query)
+
+    query = "UPDATE BOOKSTORE SET Visits = Visits + 1 WHERE Store_ID = " + \
+        str(Store_ID)
+    cursor.execute(query)
+
+    print()
+    print(colored("\u2705 Visit tracked.", 'green'))
+    print()
+    input("Press Enter to continue...")
 
 
-def get_points():
-    print("hello")
+# This function retrieves a user’s reward points. It accesses the “MEMBER” table.
+def get_points(cursor):
+    Member_ID = input("Please enter the Member ID: ")
+
+    query = "SELECT Reward_points FROM MEMBER WHERE Member_ID = " + \
+        str(Member_ID)
+    cursor.execute(query)
+
+    for result in cursor:
+        points = str(result[0])
+
+    print()
+    print(colored("Member " + Member_ID + " has " + points +
+          " reward points.", 'cyan'))
+    print()
+    input("Press Enter to continue...")
 
 
-def create_member():
-    print("hello")
+# This function creates a profile for a new member at a store. It accesses the “MEMBER” table
+# and “BOOKSTORE” table.
+def create_member(cursor, Store_ID):
+    firstName = input("Please enter the First name: ")
+    lastName = input("Please enter the Last name: ")
+
+    query = "INSERT INTO MEMBER (M_First_name, M_Last_name, Reward_points, Store_ID) VALUES (%s, %s, %s, %s)"
+    cursor.execute(query, (firstName, lastName, 0, Store_ID))
+
+    # Get Member ID
+    query = "SELECT Member_ID FROM MEMBER ORDER BY Member_ID DESC LIMIT 1"
+    cursor.execute(query)
+
+    for result in cursor:
+        memberID = str(result[0])
+
+    print()
+    print(colored("\u2705 Member created. (Member ID: " + str(memberID) + ")", 'green'))
+    print()
+    input("Press Enter to continue...")
 
 
-def add_member_phone():
-    print("hello")
+# This function adds a phone number to an existing member. It accesses the “MEMBER_PHONES” table and the
+# “MEMBER” table.
+def add_member_phone(cursor):
+    Member_ID = input("Please enter the Member ID: ")
+    Member_phone = input("Please enter the phone number to add: ")
+
+    query = "INSERT INTO MEMBER_PHONES VALUES (%s, %s)"
+    cursor.execute(query, (Member_ID, Member_phone))
+
+    print()
+    print(colored("\u2705 Phone number added.", 'green'))
+    print()
+    input("Press Enter to continue...")
 
 
-def acquire_book():
-    print("hello")
+# This function acquires a book from a publisher for the bookstore. It accesses the “BOOK” table,
+# “BOOKSTORE” table, and “PUBLISHER” table.
+def acquire_book(cursor, Store_ID):
+    Title = input("Please enter the Title: ")
+    ISBN = input("Please enter the ISBN: ")
+    Author = input("Please enter the Author: ")
+    Genre = input("Please enter the Genre: ")
+    Pages = input("Please enter the number of Pages: ")
+    Price = input("Please enter the Price: ")
+    Publisher_ID = input("Please enter the Publisher ID: ")
+
+    query = "INSERT INTO BOOK VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+    cursor.execute(query, (Title, ISBN, Author, Genre,
+                   Pages, Price, Store_ID, Publisher_ID))
+
+    print()
+    print(colored("\u2705 Book acquired.", 'green'))
+    print()
+    input("Press Enter to continue...")
 
 
 # This function checks if a book is available for purchase. It accesses the “BOOK” table.
