@@ -20,7 +20,7 @@ login = {
 2. In a new terminal, connect using `mysql -uroot -p`
 3. Enter password
 4. Execute `source ./BookstoreDB.sql`
-5. In a new terminal (which will act as the client), run `./client.py`
+5. In a new terminal (which will act as the client), run `python client.py`
 
 
 
