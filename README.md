@@ -1,6 +1,9 @@
 # bookstore - a system manager
 CS 3380 (Databases) Final Project
 
+## About
+*Problem Statement*: The application I am designing will manage inventory for a retail bookstore that is exclusive to members that create accounts. This database is essential as it will allow employees to keep track of visits, what books might need to be restocked, as well as inform members more information about each book. It also allows the store to keep track of reward points for each member, which increases with each visit to the bookstore.
+
 ## Prerequisites
 1. Install termcolor with `python3 -m pip install --upgrade termcolor`
 2. Install mysql.connector with `pip install mysql-connector-python`
@@ -10,7 +13,7 @@ CS 3380 (Databases) Final Project
 
 # Dictionary with mySQL login credentials
 login = {
-    'password': 'Z!!8a51as$Vy'
+    'password': 'your_password_here'
 }
 ```
 
@@ -25,3 +28,9 @@ login = {
 
 
 Note: To drop the schema, execute `DROP DATABASE STORE_SCHEMA;` in mysql.
+
+
+## ER Diagram
+![](/images/ConceptualDatabaseDesign.png)
+## Relational Database Schema
+![](/images/LogicalDatabaseDesign.png)
