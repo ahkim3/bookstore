@@ -57,7 +57,7 @@ CREATE TABLE EMPLOYEE (
     E_First_name VARCHAR(50),
     E_Middle_initial CHAR(1),
     E_Last_name VARCHAR(50),
-    Employee_ID INT NOT NULL,
+    Employee_ID INT NOT NULL AUTO_INCREMENT,
     Birthdate DATE,
     Address VARCHAR(50),
     SSN INT UNIQUE,
@@ -102,14 +102,14 @@ INSERT INTO BOOK VALUES
     ("All About MySQL", 1914978970983977, "Praveen Rao", "Nonfiction", 768, 132.99, 101, 812343),
     ("The History of Agriculture", 2862596726766589, "Jim Smith", "Nonfiction", 2304, 70.85, 101, 460751);
 
-INSERT INTO EMPLOYEE VALUES
-    ("James", "R", "Smith", 42398172, "1990-11-22", "100 W Broadway, Columbia, MO 65203", 123456789, 101),
-    ("Maria", "F", "Garcia", 13092809, "2000-12-28", "701 E Broadway, Columbia, MO 65205", 987654321, 101),
-    ("Robert", "E", "Brown", 81498327, "1994-12-13", "3911 Peachtree Drive Columbia, MO 65203", 123987456, 101);
+INSERT INTO EMPLOYEE (E_First_name, E_Middle_initial, E_Last_name, Birthdate, Address, SSN, Store_ID) VALUES
+    ("James", "R", "Smith", "1990-11-22", "100 W Broadway, Columbia, MO 65203", 123456789, 101),
+    ("Maria", "F", "Garcia", "2000-12-28", "701 E Broadway, Columbia, MO 65205", 987654321, 101),
+    ("Robert", "E", "Brown", "1994-12-13", "3911 Peachtree Drive Columbia, MO 65203", 123987456, 101);
 
 INSERT INTO DEPENDENT VALUES
-    (42398172, "Jimmy Smith", "2020-11-11", "Son"),
-    (42398172, "Josette Brown", "2021-12-29", "Daughter");
+    (1, "Jimmy Smith", "2020-11-11", "Son"),
+    (1, "Josette Brown", "2021-12-29", "Daughter");
 
 INSERT INTO MEMBER_PHONES VALUES
     (1, 5731234567),

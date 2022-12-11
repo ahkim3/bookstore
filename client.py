@@ -58,11 +58,12 @@ while not quit:
     elif option == "6":
         check_book(cursor)
     elif option == "7":
-        sell_book()
+        sell_book(cursor)
     elif option == "8":
-        create_employee()
+        create_employee(cursor, storeID)
     elif option == "9":
-        create_dependent()
+        create_dependent(cursor)
+        cnx.commit()
     elif option == "10":
         check_visits(cursor, storeID)
     elif option == "11":
