@@ -15,6 +15,9 @@ cnx = mysql.connector.connect(
 # Create a cursor object
 cursor = cnx.cursor()
 
+# Ask the user for the store ID
+storeID = input("Enter Store ID: ")
+
 quit = False
 
 # Prompt the user with menu until quit
@@ -22,7 +25,6 @@ while not quit:
     # Print the menu of options for the user
     print()
     print()
-    # print(colored("*********************************", "magenta"))
     print(colored("Bookstore Manager", "white", "on_magenta"))
     print()
     print("1. Track a new visit")
@@ -44,15 +46,15 @@ while not quit:
 
     # Execute the selected option
     if option == "1":
-        track_visit(cursor)
+        track_visit(cursor, storeID)
     elif option == "2":
-        get_points()
+        get_points(cursor)
     elif option == "3":
-        create_member()
+        create_member(cursor, storeID)
     elif option == "4":
-        add_member_phone()
+        add_member_phone(cursor)
     elif option == "5":
-        acquire_book()
+        acquire_book(cursor, storeID)
     elif option == "6":
         check_book(cursor)
     elif option == "7":
@@ -62,7 +64,7 @@ while not quit:
     elif option == "9":
         create_dependent()
     elif option == "10":
-        check_visits(cursor, 101)
+        check_visits(cursor, storeID)
     elif option == "11":
         # Set the quit flag to True
         quit = True

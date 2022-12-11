@@ -32,7 +32,7 @@ CREATE TABLE BOOKSTORE (
 CREATE TABLE MEMBER (
     M_First_name VARCHAR(50),
     M_Last_name VARCHAR(50),
-    Member_ID INT NOT NULL,
+    Member_ID INT NOT NULL AUTO_INCREMENT,
     Reward_points INT,
     Store_ID INT NOT NULL,
     PRIMARY KEY(Member_ID),
@@ -91,11 +91,11 @@ INSERT INTO PUBLISHER VALUES
 INSERT INTO BOOKSTORE VALUES
     ("Main Bookstore", 101, "123 E Broadway, Columbia 65201", 1000);
 
-INSERT INTO MEMBER VALUES
-    ("Thomas", "Johnson", 12093794, 10, 101),
-    ("Sarah", "Clark", 40381042, 15, 101),
-    ("Ronald", "Davidson", 51668790, 25, 101),
-    ("Ann", "Taylor", 29183703, 35, 101);
+INSERT INTO MEMBER (M_First_name, M_Last_name, Reward_points, Store_ID) VALUES
+    ("Thomas", "Johnson", 10, 101),
+    ("Sarah", "Clark", 15, 101),
+    ("Ronald", "Davidson", 25, 101),
+    ("Ann", "Taylor", 35, 101);
 
 INSERT INTO BOOK VALUES
     ("How to Get an A in CS 3380", 6574356098904128, "Andrew Kim", "Nonfiction", 239, 42.39, 101, 212782),
@@ -112,11 +112,11 @@ INSERT INTO DEPENDENT VALUES
     (42398172, "Josette Brown", "2021-12-29", "Daughter");
 
 INSERT INTO MEMBER_PHONES VALUES
-    (12093794, 5731234567),
-    (12093794, 6181234567),
-    (40381042, 5739876542),
-    (51668790, 3143129847),
-    (29183703, 6184902734);
+    (1, 5731234567),
+    (1, 6181234567),
+    (2, 5739876542),
+    (3, 3143129847),
+    (4, 6184902734);
 
 
 
