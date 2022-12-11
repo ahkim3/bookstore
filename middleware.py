@@ -133,16 +133,70 @@ def check_book(cursor):
     input("Press Enter to continue...")
 
 
-def sell_book():
-    print("hello")
+# This function sells a book. It accesses the “BOOK” table.
+def sell_book(cursor):
+    ISBN = input("What is the ISBN of the book? ")
+
+    query = "DELETE FROM BOOK WHERE ISBN = " + str(ISBN)
+    cursor.execute(query)
+
+    print()
+    print(colored("\u2705 Book sold.", 'green'))
+    print()
+    input("Press Enter to continue...")
 
 
-def create_employee():
-    print("hello")
+# This function creates a profile for a new employee at a store. It accesses the “EMPLOYEE” table
+# and “BOOKSTORE” table.
+def create_employee(cursor, Store_ID):
+    firstName = input("Please enter the First name: ")
+    mInit = input("Please enter the Middle Initial: ")
+    lastName = input("Please enter the Last name: ")
+    birthdate = input("Please enter the Birthdate (YYYY-MM-DD): ")
+    address = input("Please enter the Address: ")
+    SSN = input("Please enter the SSN: ")
+
+    query = "INSERT INTO EMPLOYEE (E_First_name, E_Middle_initial, E_Last_name, Birthdate, Address, SSN, Store_ID) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+    cursor.execute(query, (firstName, mInit, lastName,
+                   birthdate, address, SSN, Store_ID))
+
+    # Get Employee ID
+    query = "SELECT EMPLOYEE_ID FROM EMPLOYEE ORDER BY EMPLOYEE_ID DESC LIMIT 1"
+    cursor.execute(query)
+
+    for result in cursor:
+        employeeID = str(result[0])
+
+    print()
+    print(colored("\u2705 Employee created. (Employee ID: " +
+          str(employeeID) + ")", 'green'))
+    print()
+    input("Press Enter to continue...")
 
 
-def create_dependent():
-    print("hello")
+# This function creates a profile for a new dependent of an employee. It accesses the “EMPLOYEE” table
+# and “DEPENDENT” table.
+def create_dependent(cursor):
+    employeeID = input("Please enter the Employee ID: ")
+    name = input("Please enter the dependent name: ")
+    birthdate = input("Please enter the Birthdate (YYYY-MM-DD): ")
+    relationship = input("Please enter the Relationship: ")
+
+    insert_framework = ("INSERT INTO DEPENDENT "
+                        "(E_ID, Dependent_name, Birthdate, Relationship) "
+                        "VALUES (%(E_ID)s, \"%(Dependent_name)s\", %(Birthdate)s, \"%(Relationship)s\")")
+    dependent = {
+        "E_ID": employeeID,
+        "Dependent_name": name,
+        "Birthdate": birthdate,
+        "Relationship": relationship
+    }
+    cursor.execute(insert_framework, dependent)
+
+    print()
+    print(colored("\u2705 Dependent created", 'green'))
+    print()
+    input("Press Enter to continue...")
 
 
 # This function checks the total number of visits of a store. It accesses the “BOOKSTORE” table.
